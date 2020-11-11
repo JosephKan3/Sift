@@ -12,7 +12,7 @@ class App extends React.Component{
         }
 
     }
-
+//test
     async getChannelByName() {
         let response = await Youtube.getChannelByAuthorName("Pewdiepie");
         this.setState({channelName: response})
