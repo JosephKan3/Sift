@@ -6,31 +6,24 @@ class App extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
-            test: "hello",
+            test: "DOG",
             // accessToken: "",
+            channelName: ""
         }
 
     }
 
-    async testYoutube() {
-        return await Youtube.channel()
+    async getChannelByName() {
+        let response = await Youtube.getChannelByAuthorName("Pewdiepie");
+        this.setState({channelName: response})
     }
 
-    async authorizeGoogle() {
-        Youtube.authenticate(
-            '/search', {
-                params: {
-                    q: "cool"
-                }
-            }
-        )
-    }
 
     render() {
         return(
             <div>
-                <h1>{this.state.test}</h1>
-                <button onClick={this.authorizeGoogle}></button>
+                <h1>{this.state.channelName}</h1>
+                <button onClick={this.getChannelByName}></button>
             </div>
         )
     }
