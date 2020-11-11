@@ -53,18 +53,16 @@ def getCommentsByAuthorName(channelName):
     credentials = flow.run_console()
     youtube = googleapiclient.discovery.build(
         api_service_name, api_version, credentials=credentials)
-
+    # print(str(channelName))
     request = youtube.channels().list(
         part="snippet",
-        forUsername="Pewdiepie"
+        forUsername=str(channelName)
     )
 
-
-
     response = request.execute()
+    print(response)
 
     return response
-
 
 
 

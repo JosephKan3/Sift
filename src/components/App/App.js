@@ -15,7 +15,10 @@ class App extends React.Component{
 //test
     async getChannelByName() {
         let response = await Youtube.getChannelByAuthorName("Pewdiepie");
+        console.log(response)
+
         this.setState({channelName: response})
+        console.log(response)
     }
 
 

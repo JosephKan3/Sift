@@ -1,10 +1,11 @@
 const axios = require('axios').default
 
 const Youtube = {
-    getChannelByAuthorName(channelName) {
+    getChannelByAuthorName(inputchannelName) {
+        console.log(inputchannelName)
         return new Promise((resolve, reject) => {
-            axios.post("http://localhost:5000/channelByName", {
-                channelName: this.channelName
+            axios.get("http://localhost:5000/channelByName", {
+                channelName: inputchannelName
             })
         })
     }
