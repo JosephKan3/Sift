@@ -12,10 +12,12 @@ app = Flask(__name__)
 #     return test()
     
 
-@app.route('/channelByName', methods = ['GET'])
+@app.route('/channelByName/:channelName', methods = ['POST'])
 def testing():
-    channelName = request.args.get('channelName')
-    print(request)
+    channelName = request.args.get("channelName")
+    print(dir(request.args))
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    print(channelName)
     response = getCommentsByAuthorName(channelName)
     return response
 
