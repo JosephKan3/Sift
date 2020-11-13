@@ -9,6 +9,8 @@ import os
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
+import numpy as np
+import pandas as pd
 
 scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
 
@@ -35,13 +37,16 @@ def getUploadID():
     for videoId in videoIDs:
         comments = getComments(videoId)
         commentSet.append(comments)
-    print(commentSet)
+    output = np.asarray(commentSet)
+    pd.DataFrame(output).to_csv("data1.csv")
+    
 
 def getCommentsFromVideoID():
     print("Input video ID:")
     videoIdInput = input()
     comments = getComments(videoIdInput)
-    print(comments)
+    output = np.asarray(comments)
+    pd.DataFrame(output).to_csv("data1.csv")
 
 
 def getComments(videoId):
@@ -61,8 +66,6 @@ def getComments(videoId):
             print("Invalid comment ignored")
     return comments
 
-
-    return response
 def getCommentsByAuthorName(channelName):
     # print(str(channelName))
     request = youtube.channels().list(
@@ -101,7 +104,7 @@ def main():
     client_secrets_file = "client_secret.json"
 
     while True:
-        print("Enter 1, if enterring video ID, Enter 2, if enterring Youtube Channel, or Enter anything else to quit.")
+        print("Enter 1, if entering video ID, Enter 2, if entering Youtube Channel, or Enter anything else to quit.")
         functionInput = input()
         if functionInput == str(1):
             getCommentsFromVideoID()
@@ -109,8 +112,5 @@ def main():
             getUploadID()
         else:
             break
-
-
-
 if __name__ == "__main__":
     main()
